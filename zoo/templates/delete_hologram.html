@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hologramm löschen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #F44336;
+        }
+        .confirmation-box {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .confirmation-box p {
+            margin-bottom: 15px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            width: 48%;
+            padding: 12px;
+            background-color: #F44336;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            font-gewicht: 500;
+        }
+        button:hover {
+            background-color: #D32F2F;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #F44336;
+            text-decoration: none;
+            text-align: center;
+        }
+        .back-link:hover {
+            color: #B71C1C;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hologramm löschen</h1>
+    <div class="confirmation-box">
+        <p>Sind Sie sicher, dass Sie das Hologramm <strong>{{ hologram.name }}</strong> löschen möchten?</p>
+        <form method="post" class="button-container">
+            {% csrf_token %}
+            <button type="submit">Ja, löschen</button>
+            <a href="{% url 'index' %}" class="back-link">Abbrechen</a>
+        </form>
+    </div>
+</body>
+</html>
