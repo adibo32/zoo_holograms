@@ -4,17 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hologramm bearbeiten</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 20px;
             background-color: #f4f4f9;
             color: #333;
         }
         h1 {
             text-align: center;
-            color: #FF9800;
+            color: #4CAF50;
         }
         form {
             max-width: 600px;
@@ -30,7 +29,6 @@
         label {
             display: block;
             margin-bottom: 5px;
-            font-gewicht: 500;
         }
         input[type="text"], input[type="number"], input[type="date"], textarea, select {
             width: 100%;
@@ -44,26 +42,25 @@
             display: block;
             width: 100%;
             padding: 12px;
-            background-color: #FF9800;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 4px;
             font-size: 16px;
             cursor: pointer;
-            font-gewicht: 500;
         }
         button:hover {
-            background-color: #FB8C00;
+            background-color: #45a049;
         }
         .back-link {
             display: block;
             text-align: center;
             margin-top: 20px;
-            color: #FF9800;
+            color: #4CAF50;
             text-decoration: none;
         }
         .back-link:hover {
-            color: #E65100;
+            color: #388E3C;
         }
     </style>
 </head>
@@ -77,4 +74,3 @@
     <a href="{% url 'index' %}" class="back-link">Zurück zur Liste</a>
 </body>
 </html>
-
