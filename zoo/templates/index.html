@@ -4,6 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zoo Hologramm</title>
+</head>
+<body>
+    <h1>Zoo Hologramm</h1>
+    <a href="{% url 'add_hologram' %}" class="add-button">+ Neues Hologramm hinzufügen</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Gewicht</th>
+                <th>Superkraft</th>
+                <th>Ausgestorben Seit</th>
+                <th>Aktionen</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hologram in holograms %}
+                <tr>
+                    <td>{{ hologram.name }}</td>
+                    <td>{{ hologram.gewicht }}</td>
+                    <td>{{ hologram.superkraft }}</td>
+                    <td>{{ hologram.ausgestorben_seit }}</td>
+                    <td>
+                        <a href="{% url 'edit_hologram' hologram.id %}" class="edit-button">Bearbeiten</a>
+                        <a href="{% url 'delete_hologram' hologram.id %}" class="delete-button">Löschen</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% if messages %}
+        <div class="message" id="message-box">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <script>
+        setTimeout(function() {
+            var messageBox = document.getElementById('message-box');
+            if (messageBox) {
+                messageBox.style.display = 'none';
+            }
+        }, 5000);
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,41 +120,5 @@
             background-color: #0056b3;
         }
     </style>
-</head>
-<body>
-    <h1>Zoo Hologramm</h1>
-    <a href="{% url 'add_hologram' %}" class="add-button">+ Neues Hologramm hinzufügen</a>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Gewicht</th>
-                <th>Superkraft</th>
-                <th>Ausgestorben Seit</th>
-                <th>Aktionen</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for hologram in holograms %}
-                <tr>
-                    <td>{{ hologram.name }}</td>
-                    <td>{{ hologram.gewicht }}</td>
-                    <td>{{ hologram.superkraft }}</td>
-                    <td>{{ hologram.ausgestorben_seit }}</td>
-                    <td>
-                        <a href="{% url 'edit_hologram' hologram.id %}" class="edit-button">Bearbeiten</a>
-                        <a href="{% url 'delete_hologram' hologram.id %}" class="delete-button">Löschen</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% if messages %}
-        <div class="message">
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        </div>
-    {% endif %}
 </body>
 </html>
