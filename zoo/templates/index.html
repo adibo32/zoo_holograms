@@ -8,6 +8,25 @@
 <body>
     <h1>Zoo Hologramm</h1>
     <a href="{% url 'add_hologram' %}" class="add-button">+ Neues Hologramm hinzufügen</a>
+    <form method="GET" action="{% url 'index' %}" class="filter-container">
+        <input type="text" name="filter" value="{{ filter_term }}" class="filter-input" placeholder="Filter...">
+        
+        <label for="sort">Sortieren nach:</label>
+        <select name="sort" class="sort-select">
+            <option value="name" {% if sort_column == 'name' %}selected{% endif %}>Name</option>
+            <option value="gewicht" {% if sort_column == 'gewicht' %}selected{% endif %}>Gewicht</option>
+            <option value="superkraft" {% if sort_column == 'superkraft' %}selected{% endif %}>Superkraft</option>
+            <option value="ausgestorben_seit" {% if sort_column == 'ausgestorben_seit' %}selected{% endif %}>Ausgestorben Seit</option>
+        </select>
+
+        <select name="order" class="sort-select">
+            <option value="asc" {% if sort_order == 'asc' %}selected{% endif %}>Aufsteigend</option>
+            <option value="desc" {% if sort_order == 'desc' %}selected{% endif %}>Absteigend</option>
+        </select>
+
+        <button type="submit" class="filter-button">Anwenden</button>
+    </form>
+
     <table>
         <thead>
             <tr>
@@ -15,7 +34,7 @@
                 <th>Gewicht</th>
                 <th>Superkraft</th>
                 <th>Ausgestorben Seit</th>
-                <th>Aktionen</th>
+                <th>Bearbeiten/Löschen</th>
             </tr>
         </thead>
         <tbody>
@@ -33,6 +52,7 @@
             {% endfor %}
         </tbody>
     </table>
+
     {% if messages %}
         <div class="message" id="message-box">
             {% for message in messages %}
@@ -118,6 +138,26 @@
         }
         .add-button:hover {
             background-color: #0056b3;
+        }
+        .filter-input, .sort-select {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+            width: auto;
+            max-width: 200px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .filter-container {
+            margin-bottom: 20px;
+        }
+        .filter-button {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </body>

@@ -2,10 +2,29 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Hologram
 from .forms import HologramForm
 from django.contrib import messages
+from django.db.models import Q
 
 def index(request):
-    holograms = Hologram.objects.all()
-    return render(request, 'index.html', {'holograms': holograms})
+    filter_term = request.GET.get('filter', '')
+    sort_column = request.GET.get('sort', 'name')
+    sort_order = request.GET.get('order', 'asc')
+
+    if filter_term:
+        holograms = Hologram.objects.filter(
+            Q(name__icontains=filter_term) |
+            Q(gewicht__icontains=filter_term) |
+            Q(superkraft__icontains=filter_term) |
+            Q(ausgestorben_seit__icontains=filter_term)
+        )
+    else:
+        holograms = Hologram.objects.all()
+
+    if sort_order == 'asc':
+        holograms = holograms.order_by(sort_column)
+    else:
+        holograms = holograms.order_by(f'-{sort_column}')
+
+    return render(request, 'index.html', {'holograms': holograms, 'filter_term': filter_term, 'sort_column': sort_column, 'sort_order': sort_order})
 
 def add_hologram(request):
     if request.method == 'POST':
