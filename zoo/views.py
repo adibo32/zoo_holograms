@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Hologram
 from .forms import HologramForm
 from django.contrib import messages
-from django.db.models import Q
 
 def index(request):
     filter_term = request.GET.get('filter', '')
@@ -10,12 +9,7 @@ def index(request):
     sort_order = request.GET.get('order', 'asc')
 
     if filter_term:
-        holograms = Hologram.objects.filter(
-            Q(name__icontains=filter_term) |
-            Q(gewicht__icontains=filter_term) |
-            Q(superkraft__icontains=filter_term) |
-            Q(ausgestorben_seit__icontains=filter_term)
-        )
+        holograms = Hologram.objects.filter(name__icontains=filter_term)
     else:
         holograms = Hologram.objects.all()
 
