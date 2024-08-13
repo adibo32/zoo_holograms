@@ -22,11 +22,12 @@ class HologramViewTests(TestCase):
         self.assertContains(response, "test1")
         self.assertNotContains(response, "test2")
 
-    def test_index_view_with_sorting(self):
-        response = self.client.get(reverse('index') + '?sort=name&order=desc')
+    def test_index_view_with_sorting_asc(self):
+        response = self.client.get(reverse('index'), {'order': 'asc'})
         self.assertEqual(response.status_code, 200)
         holograms = response.context['holograms']
-        self.assertEqual(holograms.first().name, "test2")
+        self.assertEqual(holograms[0].name, "test1")
+        self.assertEqual(holograms[1].name, "test2")
 
     def test_add_hologram_view(self):
         response = self.client.post(reverse('add_hologram'), {

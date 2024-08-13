@@ -11,12 +11,8 @@
     <form method="GET" action="{% url 'index' %}" class="filter-container">
         <input type="text" name="filter" value="{{ filter_term }}" class="filter-input" placeholder="Filter...">
         
-        <label for="sort">Sortieren nach:</label>
         <select name="sort" class="sort-select">
-            <option value="name" {% if sort_column == 'name' %}selected{% endif %}>Name</option>
-            <option value="gewicht" {% if sort_column == 'gewicht' %}selected{% endif %}>Gewicht</option>
-            <option value="superkraft" {% if sort_column == 'superkraft' %}selected{% endif %}>Superkraft</option>
-            <option value="ausgestorben_seit" {% if sort_column == 'ausgestorben_seit' %}selected{% endif %}>Ausgestorben Seit</option>
+            <option value="name" {% if sort_column == 'name' %}selected{% endif %}>Sortieren nach Name</option>
         </select>
 
         <select name="order" class="sort-select">
